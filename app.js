@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const http = require('http');
+require("./models")
 
 const hostname = '127.0.0.1';
 const port = 3000;
