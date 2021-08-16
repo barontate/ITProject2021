@@ -1,0 +1,22 @@
+{
+  "name": "comp_sys_dropouts_personal_crm",
+  "version": "1.0.0",
+  "description": "A personal CRM built by the fabulous team called comp sys dropouts",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nelsonwalker/ITProject2021.git"
+  },
+  "author": "Comp Sys Dropouts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nelsonwalker/ITProject2021/issues"
+  },
+  "homepage": "https://github.com/nelsonwalker/ITProject2021#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
