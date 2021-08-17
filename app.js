@@ -3,11 +3,8 @@ const app = express();
 
 require("./models")
 
-
-const port = 3000;
-
-app.listen(port, () => {
-    console.log('The library app is listening on port 3000! http://localhost:3000')
+app.listen(process.env.PORT || 5000, () => {
+    console.log('The library app is listening on a system defined port or port 5000! http://localhost:5000')
 })
 
 app.get('/', (req, res) => {
