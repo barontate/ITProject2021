@@ -16,3 +16,8 @@ app.get('/', (req, res) => {
 app.get('/express_backend', (req, res) => {
     res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
 }); 
+
+//don't know how to link this with an actual react file - NR
+app.get('/loginpage', (req, res) => {
+    res.send({ react: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+});
