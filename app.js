@@ -18,7 +18,7 @@ app.listen(process.env.PORT || 5000, () => {
 })
 
 app.get('/', (req, res) => {
-    res.send('<h1>Comp Sys Dropouts Personal CRM</h1>')
+    res.render('home.html');
 })
 
 app.get('/express_backend', (req, res) => {
