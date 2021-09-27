@@ -11,6 +11,6 @@ userRouter.get("/signup", (req,res) => {
     res.render('./signuppage/signuppage.html')
 })
 
-userRouter.get("/:username", user.getUserDetails);
+userRouter.get("/home", user.getUserDetails);
 
 module.exports = userRouter;

@@ -3,7 +3,7 @@ const User = db.users;
 
 const getUserDetails = async (req, res) => {
     try {
-        let user = await User.findOne({ userName: req.session.username }).lean()
+        let user = await User.findOne({ userName: req.body.username }).lean()
         return res.send(user);
     }
     catch (err) {
