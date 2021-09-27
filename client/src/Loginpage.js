@@ -1,30 +1,32 @@
 import './App.css';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import React, { Component } from 'react';
 
-function Loginpage() {
-  return (
-    <Container>
-      
-      <Logo>
-        <Tree/>
-        <h1>Branch</h1>
-      </ Logo>
-      <Inputs>
-        <input type='text' id='username' placeholder="Username" />
-        <input type='password' id='password' placeholder="Password" />
-        <Button>
-          <input type="submit" value="Login"></input>
-        </ Button>
-      </Inputs>
-      <Footer>
-        <p>Don't have an account? Sign up here</p>
-        <p>Contact us: branch@gmail.com</p>
-      </Footer>
-    </Container>
-  );
+
+export default class Loginpage extends Component {
+
+  render() {
+    return (
+      <Container>        
+        <Logo>
+          <Tree/>
+          <h1>Branch</h1>
+        </ Logo>
+        <Inputs>
+          <input type='text' id='username' placeholder="Username" />
+          <input type='password' id='password' placeholder="Password" />
+          <Button>
+            <input type="submit" value="Login"></input>
+          </ Button>
+        </Inputs>
+        <Footer>
+          <p>Don't have an account? Sign up here</p>
+          <p>Contact us: branch@gmail.com</p>
+        </Footer>
+      </Container>
+    );
+  }
 }
-
-export default Loginpage;
 
 const Container = styled.div`
   height: 100vh;
