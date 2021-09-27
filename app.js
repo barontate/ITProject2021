@@ -5,22 +5,15 @@ require("./models")
 
 //Users
 var users = require('./routes/userRouter');
+const views ='./views/';
 app.use('/', users);
-app.use(express.static('./pages/loginpage'));
-app.use(express.static('./pages/signuppage'));
+app.use(express.static(views));
 
 
-app.set('view engine', 'html');
-app.set('views', './pages');
-app.engine('html', require('ejs').renderFile);
 app.listen(process.env.PORT || 5000, () => {
     console.log('The library app is listening on a system defined port or port 5000! http://localhost:5000')
 })
 
 app.get('/', (req, res) => {
-    res.render('home.html');
-})
-
-app.get('/express_backend', (req, res) => {
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' });
+    res.sendFile(views + "index.html");
 })
