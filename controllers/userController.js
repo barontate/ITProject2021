@@ -4,7 +4,7 @@ const User = db.users;
 const getUserDetails = async (req, res) => {
     try {
         let user = await User.findOne({ userName: req.body.username }).lean()
-        return res.send(user);
+        return res.render('<h1>Logged in!</h1>');
     }
     catch (err) {
         res.status(400)

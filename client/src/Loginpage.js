@@ -12,7 +12,7 @@ export default class Loginpage extends Component {
           <Tree/>
           <h1>Branch</h1>
         </ Logo>
-        <Inputs action="/home">
+        <Inputs action="/login">
           <input type='text' id='username' placeholder="Username" />
           <input type='password' id='password' placeholder="Password" />
           <Button>
