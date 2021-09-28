@@ -2,10 +2,6 @@ import './App.css';
 import styled from 'styled-components'
 import { useState } from 'react'
 
-function loginSubmit(){
-
-}
-
 function Login() {
 
   const [loginStatus, setLoginStatus] = useState(true);
