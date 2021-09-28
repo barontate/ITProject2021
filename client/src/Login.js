@@ -2,6 +2,10 @@ import './App.css';
 import styled from 'styled-components'
 import { useState } from 'react'
 
+function loginSubmit(){
+
+}
+
 function Login() {
 
   const [loginStatus, setLoginStatus] = useState(true);
@@ -12,19 +16,20 @@ function Login() {
       <LogoWrap>
         <Logo/>
       </ LogoWrap>
-      <Inputs action="bruh">
+      <Inputs>
         <LSwindow loginStatus={ !loginStatus }>
-            <input type='text' id='username' placeholder="Username" />
+            <input type='text' id='email' placeholder="Email" />
             <input type='password' id='password' placeholder="Password" />
             <Button>
             <input type="submit" value="Login"></input>
             </ Button>
         </LSwindow>
         <LSwindow loginStatus={ loginStatus }>
-            <input type='text' id='username' placeholder="Username" />
+            <input type='text' id='userName' placeholder="Username" />
+            <input type='text' id='firstName' placeholder="First Name" />
+            <input type='text' id='lastName' placeholder="Last Name" />
             <input type='text' id='email' placeholder="Email" />
             <input type='password' id='password' placeholder="Password" />
-            <input type='password' id='passwordConfirm' placeholder="Confirm Password" />
             <Button>
             <input type="submit" value="Signup"></input>
             </ Button>
@@ -100,7 +105,8 @@ const LogoWrap = styled.div`
 `
 
 const Inputs = styled.form.attrs({
-  
+  action: "/api/login", //"/api/signup"
+  method: "post"
 })`
   gap: 10px;
   position: fixed;
