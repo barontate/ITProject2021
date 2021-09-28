@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const secret = process.env.PASSPORT_KEY;
 
 const login = function(req, res) {
     const { email, password } = req.body;
@@ -15,7 +16,7 @@ const login = function(req, res) {
             error: 'Incorrect email or password'
           });
       } else {
-        user.isCorrectPassword(password, function(err, same) {
+        user.validPassword(password, function(err, same) {
           if (err) {
             res.status(500)
               .json({

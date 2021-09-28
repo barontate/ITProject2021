@@ -31,9 +31,15 @@ userSchema.pre('save', function(next) {
 });
 
 // Check if password is correct to login.
-userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);
-};
+userSchema.methods.validPassword = function(password, callback){
+  bcrypt.compare(password, this.password, function(err, same) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(err, same);
+    }
+  });
+}
 
 const User = mongoose.model("User", userSchema)
 module.exports = User

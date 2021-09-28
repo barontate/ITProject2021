@@ -6,13 +6,8 @@ const withAuth = require('../config/middleware');
 
 //Create user router
 const userRouter = express.Router();
+const user = require('../controllers/userController');
 
-<<<<<<< Updated upstream
-//login
-userRouter.get("/login", (req,res) => {
-    res.send('<h1>Login</h1>');
-})
-=======
 userRouter.get("/login", (req, res) => {
     res.send('hello');
 });
@@ -28,6 +23,5 @@ userRouter.get('/api/secret', withAuth, function(req, res) {
 userRouter.get('/verify', withAuth, function(req, res) {
     res.sendStatus(200);
 });
->>>>>>> Stashed changes
 
 module.exports = userRouter;

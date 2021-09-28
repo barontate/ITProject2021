@@ -8,6 +8,7 @@ require("./models")
 
 //Users
 var users = require('./routes/userRouter');
+var views = "./views";
 app.use('/', users);
 app.use(express.static(views));
 
