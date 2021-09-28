@@ -6,20 +6,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 require("./models")
 
-<<<<<<< Updated upstream
-=======
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
-
 //Users
->>>>>>> Stashed changes
 var users = require('./routes/userRouter');
 app.use('/', users);
-<<<<<<< Updated upstream
-=======
 app.use(express.static(views));
 
->>>>>>> Stashed changes
 app.listen(process.env.PORT || 5000, () => {
     console.log('The library app is listening on a system defined port or port 5000! http://localhost:5000')
 })
