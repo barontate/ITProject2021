@@ -1,14 +1,16 @@
 const express = require('express')
 const app = express();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 require("./models")
 
 //Users
 var users = require('./routes/userRouter');
-const views ='./views/';
+var views = "./views";
 app.use('/', users);
 app.use(express.static(views));
-
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('The library app is listening on a system defined port or port 5000! http://localhost:5000')
