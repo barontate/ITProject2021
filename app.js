@@ -1,21 +1,22 @@
-const express = require('express')
+const express = require('express');
 const app = express();
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+require('./models');
 
-require("./models")
+//Cookies for JWT
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 //Users
 var users = require('./routes/userRouter');
-var views = "./views";
 app.use('/', users);
-app.use(express.static(views));
+
+//React app
+var reactPath = "./client/build";
+app.use(express.static(reactPath));
+app.get('/', (req, res) => {
+    res.sendFile(views + "index.html");
+})
 
 app.listen(process.env.PORT || 5000, () => {
     console.log('The library app is listening on a system defined port or port 5000! http://localhost:5000')
-})
-
-app.get('/', (req, res) => {
-    res.sendFile(views + "index.html");
 })
