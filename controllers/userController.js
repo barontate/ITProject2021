@@ -33,8 +33,7 @@ const login = function(req, res) {
             const token = jwt.sign(payload, secret, {
               expiresIn: '1h'
             });
-            res.cookie('token', token, { httpOnly: true })
-              .sendStatus(200);
+            res.cookie('token', token, { httpOnly: true }).redirect('/home');
           }
         });
       }
@@ -49,7 +48,12 @@ const registerUser = function (req, res) {
             res.status(500).send("Error registering user please try again.");
         }
         else {
-            res.status(200).send("User successfully registered!");
+          // Issue token
+          const payload = { email };
+          const token = jwt.sign(payload, secret, {
+            expiresIn: '1h'
+          });
+          res.cookie('token', token, { httpOnly: true }).status(200).redirect('/home');
         }
     });
 }

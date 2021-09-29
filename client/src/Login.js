@@ -12,7 +12,7 @@ function Login() {
       <LogoWrap>
         <Logo/>
       </ LogoWrap>
-      <Inputs>
+      <LoginForm>
         <LSwindow loginStatus={ !loginStatus }>
             <input type='text' id='email' name='email' placeholder="Email" />
             <input type='password' id='password' name='password' placeholder="Password" />
@@ -20,18 +20,19 @@ function Login() {
             <input type="submit" value="Login"></input>
             </ Button>
         </LSwindow>
+      </LoginForm>
+      <SignUpForm>
         <LSwindow loginStatus={ loginStatus }>
-            <input type='text' id='userName' placeholder="Username" />
-            <input type='text' id='firstName' placeholder="First Name" />
-            <input type='text' id='lastName' placeholder="Last Name" />
-            <input type='text' id='email' placeholder="Email" />
-            <input type='password' id='password' placeholder="Password" />
+            <input type='text' id='userName' name='userName' placeholder="Username" />
+            <input type='text' id='firstName' name='firstName' placeholder="First Name" />
+            <input type='text' id='lastName' name='lastName' placeholder="Last Name" />
+            <input type='text' id='email' name='email' placeholder="Email" />
+            <input type='password' id='password' name='password' placeholder="Password" />
             <Button>
             <input type="submit" value="Signup"></input>
             </ Button>
         </LSwindow>
-        
-      </Inputs>
+      </SignUpForm>
       <Footer>
         <LSprompt loginStatus={ !loginStatus } onClick={()=>setLoginStatus(false)}>
             <p>Don't have an account? Sign up here</p>
@@ -100,8 +101,8 @@ const LogoWrap = styled.div`
     }
 `
 
-const Inputs = styled.form.attrs({
-  action: "/api/login", //"/api/signup"
+const LoginForm = styled.form.attrs({
+  action: "/api/login",
   method: "post"
 })`
   gap: 10px;
@@ -126,9 +127,36 @@ const Inputs = styled.form.attrs({
 
   input[type=text]:focus, input[type=password]:focus  {
     outline: none;
+  } 
+`
+
+const SignUpForm = styled.form.attrs({
+  action: "/api/signup",
+  method: "post"
+})`
+  gap: 10px;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  top: 35%;
+  left: 50%; 
+  transform: translate(-50%, 0%);
+
+  input[type=text], input[type=password] {
+    padding: 5px 5px;
+    background-color: transparent;
+    margin: 8px 0;
+    border-bottom: 1px solid black;
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    box-sizing: border-box;
+    color: black;
   }
 
-  
+  input[type=text]:focus, input[type=password]:focus  {
+    outline: none;
+  } 
 `
 
 const Button = styled.div`

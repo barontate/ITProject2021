@@ -14,7 +14,7 @@ app.use('/', users);
 var reactPath = "./client/build";
 app.use(express.static(reactPath));
 app.get('/', (req, res) => {
-    res.sendFile(views + "index.html");
+    res.sendFile(reactPath + "index.html");
 })
 
 app.listen(process.env.PORT || 5000, () => {
