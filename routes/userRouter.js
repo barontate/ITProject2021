@@ -2,7 +2,7 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
-const withAuth = require('../config/middleware');
+const withAuth = require('../config/middleware').withAuth;
 
 //Create user router
 const userRouter = express.Router();
