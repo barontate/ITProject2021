@@ -19,4 +19,8 @@ const withAuth = function(req, res, next) {
   }
 }
 
-module.exports = withAuth;
+const addRequestTime = function(req, res, next) {
+  req.requestTime = Date.now();
+};
+
+module.exports = {withAuth, addRequestTime};
