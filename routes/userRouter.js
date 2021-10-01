@@ -1,16 +1,12 @@
 // create user router
-const express = require('express');
-var bodyParser = require('body-parser')
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-const withAuth = require('../config/middleware').withAuth;
+const express = require('express')
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const withAuth = require('../config/middleware').withAuth
 
-//Create user router
-const userRouter = express.Router();
-const user = require('../controllers/userController');
-
-userRouter.get("/login", (req, res) => {
-    res.send('hello');
-});
+// Create user router
+const userRouter = express.Router()
+const user = require('../controllers/userController')
 
 userRouter.post("/api/login", urlencodedParser, user.login);
 
