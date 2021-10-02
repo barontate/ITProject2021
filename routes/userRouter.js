@@ -12,9 +12,9 @@ userRouter.post('/api/login', urlencodedParser, user.login)
 
 userRouter.post('/api/signup', urlencodedParser, user.registerUser)
 
-userRouter.get('/api/secret', withAuth, function (req, res) {
-  res.send('The password is potato')
-})
+userRouter.post('/api/add', withAuth, urlencodedParser, user.addContact)
+
+userRouter.post('/api/remove', withAuth, urlencodedParser, user.removeContact)
 
 userRouter.get('/verify', withAuth, function (req, res) {
   res.sendStatus(200)
