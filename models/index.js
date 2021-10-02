@@ -2,14 +2,14 @@ require('dotenv').config()
 
 const mongoose = require("mongoose")
 // Connect to MongoDB - database login is retrieved from environment variables - YOU SHOULD USE YOUR OWN ATLAS CLUSTER
-CONNECTION_STRING = "mongodb+srv://jack:<password>@compsysdropouts.995ao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+CONNECTION_STRING = "mongodb+srv://<username>:<password>@compsysdropouts.995ao.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 MONGO_URL = CONNECTION_STRING.replace("<username>",process.env.MONGO_USERNAME).replace("<password>",process.env.MONGO_PASSWORD)
 mongoose.connect(MONGO_URL || "mongodb://localhost", {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    dbName: "mylibraryapp"
+    dbName: "branch"
 })
 const db = mongoose.connection
 db.on("error", err => {
@@ -19,5 +19,5 @@ db.on("error", err => {
 db.once("open", async () => {
     console.log("Mongo connection started on " + db.host + ":" + db.port)
 })
-db.users = require("./user");
-
+db.users = require('./user');
+db.contacts = require('./contact')
