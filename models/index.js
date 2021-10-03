@@ -21,3 +21,4 @@ db.once("open", async () => {
 })
 db.users = require('./user');
 db.contacts = require('./contact')
+db.tags = require('./tag')
