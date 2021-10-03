@@ -9,7 +9,7 @@ mongoose.connect(MONGO_URL || "mongodb://localhost", {
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-    dbName: "mylibraryapp"
+    dbName: "branch"
 })
 const db = mongoose.connection
 db.on("error", err => {
@@ -19,5 +19,6 @@ db.on("error", err => {
 db.once("open", async () => {
     console.log("Mongo connection started on " + db.host + ":" + db.port)
 })
-db.users = require("./user");
-
+db.users = require('./user');
+db.contacts = require('./contact')
+db.tags = require('./tag')

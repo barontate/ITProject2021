@@ -1,10 +1,12 @@
 const mongoose = require("mongoose")
+
 const contactSchema = new mongoose.Schema({
-    firstName:String,
-    lastName:String,
-    email:String,
-    phoneNumber:Number,
-    notes:String
+    firstName: {type: String, required: true},
+    lastName: {type: String},
+    email: { type: String},
+    notes: {type: String},
+    tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'tags'}],
 })
-const C = mongoose.model("User", contactSchema)
+
+const Contact = mongoose.model("Contact", contactSchema)
 module.exports = Contact
