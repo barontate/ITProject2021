@@ -3,3 +3,4 @@
 .env
 /client/node_modules/
 /views/
+/client/build/
