@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nelsonwalker/ITProject2021.git"
+    "url": "git+https://github.com/barontate/ITProject2021.git"
   },
   "author": "Comp Sys Dropouts",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nelsonwalker/ITProject2021/issues"
+    "url": "https://github.com/barontate/ITProject2021/issues"
   },
-  "homepage": "https://github.com/nelsonwalker/ITProject2021#readme",
+  "homepage": "https://github.com/barontate/ITProject2021#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
