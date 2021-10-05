@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Loginpage from './Loginpage';
+import Login from './Loginpage';
 import Homepage from './Homepage';
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
           </ul>
           <hr />
           <Switch>
-              <Route path='/login' component={Loginpage} />
+              <Route path='/login' component={Login} />
               <Route path='/home' component={Homepage} />
           </Switch>
         </div>
