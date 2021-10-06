@@ -14,6 +14,7 @@ const login = function(req, res) {
           error: 'Internal error please try again'
         });
       } else if (!user) {
+        console.log('hello')
         res.status(401)
           .json({
             error: 'Incorrect email or password'
@@ -36,7 +37,7 @@ const login = function(req, res) {
             const token = jwt.sign(payload, secret, {
               expiresIn: '1h'
             });
-            res.cookie('token', token, { httpOnly: true }).redirect('/home');
+            res.cookie('token', token, { httpOnly: true });
           }
         });
       }

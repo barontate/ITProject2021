@@ -2,9 +2,44 @@ import './App.css';
 import styled from 'styled-components'
 import { useState } from 'react'
 
-function Login() {
+const Login = (props) => {
 
   const [loginStatus, setLoginStatus] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  };
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const details = {
+      email : email,
+      password : password,
+    }
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");    
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body : formBody,
+    };
+    fetch('/api/login', requestOptions)
+      .then( ()=> {
+        props.history.push("/home");
+        window.location.reload();
+      })
+  }
     
   return (
     <Container>
@@ -12,10 +47,10 @@ function Login() {
       <LogoWrap>
         <Logo/>
       </ LogoWrap>
-      <LoginForm>
+      <LoginForm onSubmit={handleLogin}>
         <LSwindow loginStatus={ !loginStatus }>
-            <input type='text' id='email' name='email' placeholder="Email" />
-            <input type='password' id='password' name='password' placeholder="Password" />
+            <input type='text' id='email' name='email' placeholder="Email" value={email} onChange={onChangeEmail} />
+            <input type='password' id='password' name='password' placeholder="Password" value={password} onChange={onChangePassword} />
             <Button>
             <input type="submit" value="Login"></input>
             </ Button>

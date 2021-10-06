@@ -29,6 +29,6 @@ userRouter.get('/verify', withAuth, function (req, res) {
   res.sendStatus(200)
 })
 
-userRouter.get('/home', withAuth, user.getContacts)
+// userRouter.get('/home', withAuth, user.getContacts)
 
 module.exports = userRouter
