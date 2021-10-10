@@ -52,10 +52,19 @@ class Login extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.isAuthenticated) {
+      this.props.history.push('/home')
+    }
     if(nextProps.errors) {
         this.setState({
             errors: nextProps.errors
         });
+    }
+  }
+
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+        this.props.history.push('/home');
     }
   }
 
@@ -103,9 +112,11 @@ class Login extends Component {
 Login.propTypes = {
   registerUser: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   errors: state.errors
 });
 

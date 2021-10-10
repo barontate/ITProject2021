@@ -5,6 +5,10 @@ import PersonAddAlt1IconOutlined from '@mui/icons-material/PersonAddAlt1Outlined
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from './actions/authentication';
+import { withRouter } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -16,6 +20,7 @@ class Home extends Component {
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogout= this.handleLogout.bind(this);
   }
     
   handleInputChange(e) {
@@ -33,12 +38,19 @@ class Home extends Component {
       console.log(user);
   }
 
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logoutUser(this.props.history);
+  }
+
   render() { 
     return (
         <Container>
           <Header>
             <h1> LOGO </h1>
-            <h1> Logout </h1>
+            <Button onSubmit={this.handleLogout}>
+              <input type="submit" value="Logout"></input>
+            </ Button>
           </Header>
           <Content>
             <ToolDisplay>
@@ -90,7 +102,39 @@ class Home extends Component {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  logoutUser: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {logoutUser})(withRouter(Home));
+
+
+const Button = styled.div`
+  display: flex;
+  justify-content: center;
+  
+
+  input[type=submit] {
+    width: 60px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(150, 180, 180);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 5px grey;
+  }
+
+  input[type=submit]:hover {
+    background-color: rgb(50, 230, 230);
+    cursor: pointer;
+    box-shadow: 4px 4px 5px grey;
+  }
+`
 
 const TextIn = styled.div`
   input{
