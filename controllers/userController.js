@@ -36,7 +36,10 @@ const login = function(req, res) {
             const token = jwt.sign(payload, secret, {
               expiresIn: '1h'
             });
-            res.cookie('token', token, { httpOnly: true }).redirect('/home');
+            res.json({
+              success: true,
+              token: `Bearer ${token}`
+            });
           }
         });
       }
@@ -48,7 +51,7 @@ const registerUser = function (req, res) {
   const user = new User({firstName, lastName, userName, email, password});
   user.save(function(err) {
     if (err) {
-      res.status(500).send("Error registering user please try again.");
+      res.status(500).json({email: "Error registering user please try again."});
     }
     else {
       // Issue token
@@ -56,7 +59,10 @@ const registerUser = function (req, res) {
       const token = jwt.sign(payload, secret, {
         expiresIn: '1h'
       });
-      res.cookie('token', token, { httpOnly: true }).status(200).redirect('/home');
+      res.json({
+        success: true,
+        token: `Bearer ${token}`
+      });
     }
   });
 }

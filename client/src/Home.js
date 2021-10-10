@@ -1,5 +1,5 @@
 import './App.css'
-import {React, useState} from 'react'
+import {Component, React} from 'react'
 import styled from 'styled-components'
 import PersonAddAlt1IconOutlined from '@mui/icons-material/PersonAddAlt1Outlined';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
@@ -7,10 +7,33 @@ import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 
 
-function Home() {
+class Home extends Component {
 
-  const [addingCard, setAddingCard] = useState(false);
-  
+  constructor() {
+    super();
+    this.state = {
+      addingCard: false,
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+    
+  handleInputChange(e) {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit(e) {
+      e.preventDefault();
+      const user = {
+          email: this.state.email,
+          password: this.state.password,
+      }
+      console.log(user);
+  }
+
+  render() { 
     return (
         <Container>
           <Header>
@@ -24,12 +47,12 @@ function Home() {
                 <MySearchIcon></MySearchIcon>
               </SearchBar>
               <p>[SORT---------]</p>
-              <Addcard sx={{ fontSize: '60px' }} onClick={()=>setAddingCard(true)}></Addcard>
+              <Addcard sx={{ fontSize: '60px' }} onClick={() => this.setState({addingCard: true})}></Addcard>
             </ToolDisplay>
           </Content>
-          <CardInfoInput addingCard = { addingCard }>
-            <CloseButton sx={{ fontSize: '60px' }} onClick={()=>setAddingCard(false)}></CloseButton>
-            <DataIn>
+          <CardInfoInput addingCard = { this.state.addingCard }>
+            <CloseButton sx={{ fontSize: '60px' }} onClick={() => this.setState({addingCard: false})}></CloseButton>
+            <DataIn onSubmit = {this.handleSubmit}>
               <TextFields>
                 <Name>
                   <input type='text'></input>
@@ -64,6 +87,7 @@ function Home() {
           </CardInfoInput>
         </Container>
     )
+  }
 }
 
 export default Home;

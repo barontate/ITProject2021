@@ -1,52 +1,115 @@
 import './App.css';
 import styled from 'styled-components'
-import { useState } from 'react'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import {registerUser, loginUser} from './actions/authentication';
 
-function Login() {
+class Login extends Component {
 
-  const [loginStatus, setLoginStatus] = useState(true);
+  constructor() {
+    super();
+    this.state = {
+        email: '',
+        password: '',
+        userName: '',
+        firstName: '',
+        lastName: '',
+        loginStatus: false,
+        errors: {}
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleSignup = this.handleSignup.bind(this);
+  }
     
-  return (
-    <Container>
-      
-      <LogoWrap>
-        <Logo/>
-      </ LogoWrap>
-      <LoginForm>
-        <LSwindow loginStatus={ !loginStatus }>
-            <input type='text' id='email' name='email' placeholder="Email" />
-            <input type='password' id='password' name='password' placeholder="Password" />
-            <Button>
-            <input type="submit" value="Login"></input>
-            </ Button>
-        </LSwindow>
-      </LoginForm>
-      <SignUpForm>
-        <LSwindow loginStatus={ loginStatus }>
-            <input type='text' id='userName' name='userName' placeholder="Username" />
-            <input type='text' id='firstName' name='firstName' placeholder="First Name" />
-            <input type='text' id='lastName' name='lastName' placeholder="Last Name" />
-            <input type='text' id='email' name='email' placeholder="Email" />
-            <input type='password' id='password' name='password' placeholder="Password" />
-            <Button>
-            <input type="submit" value="Signup"></input>
-            </ Button>
-        </LSwindow>
-      </SignUpForm>
-      <Footer>
-        <LSprompt loginStatus={ !loginStatus } onClick={()=>setLoginStatus(false)}>
-            <p>Don't have an account? Sign up here</p>
-        </LSprompt>
-        <LSprompt loginStatus={ loginStatus } onClick={()=>setLoginStatus(true)}>
-            <p>Have an account? Login here</p>
-        </LSprompt>
-        <p>Contact us: branch@gmail.com</p>
-      </Footer>
-    </Container>
-  );
+  handleInputChange(e) {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
+
+  handleLogin(e) {
+      e.preventDefault();
+      const user = {
+          email: this.state.email,
+          password: this.state.password,
+      }
+      this.props.loginUser(user, this.props.history);
+  }
+
+  handleSignup(e) {
+    e.preventDefault();
+    const user = {
+        email: this.state.email,
+        password: this.state.password,
+        userName: this.state.userName,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+    }
+    this.props.registerUser(user, this.props.history);
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.errors) {
+        this.setState({
+            errors: nextProps.errors
+        });
+    }
+  }
+
+  render() {
+    return (
+      <Container>
+        <LogoWrap>
+          <Logo/>
+        </ LogoWrap>
+        <LoginForm onSubmit={this.handleLogin}>
+          <LSwindow loginStatus={this.state.loginStatus}>
+              <input type='text' id='email' name='email' placeholder="Email" onChange={this.handleInputChange} value={this.state.email}/>
+              <input type='password' id='password' name='password' placeholder="Password" onChange={this.handleInputChange} value={this.state.password} />
+              <Button>
+              <input type="submit" value="Login"></input>
+              </ Button>
+          </LSwindow>
+        </LoginForm>
+        <SignUpForm onSubmit={this.handleSignup}>
+          <LSwindow loginStatus={!this.state.loginStatus}>
+              <input type='text' id='userName' name='userName' placeholder="Username" onChange={this.handleInputChange} value={this.state.userName}/>
+              <input type='text' id='firstName' name='firstName' placeholder="First Name" onChange={this.handleInputChange} value={this.state.firstName}/>
+              <input type='text' id='lastName' name='lastName' placeholder="Last Name" onChange={this.handleInputChange} value={this.state.lastName}/>
+              <input type='text' id='email' name='email' placeholder="Email" onChange={this.handleInputChange} value={this.state.email}/>
+              <input type='password' id='password' name='password' placeholder="Password" onChange={this.handleInputChange} value={this.state.password}/>
+              <Button>
+              <input type="submit" value="Signup"></input>
+              </ Button>
+          </LSwindow>
+        </SignUpForm>
+        <Footer>
+          <LSprompt loginStatus={this.state.loginStatus} onClick={() => this.setState({loginStatus: true})}>
+              <p>Don't have an account? Sign up here</p>
+          </LSprompt>
+          <LSprompt loginStatus={!this.state.loginStatus} onClick={() => this.setState({loginStatus: false})}>
+              <p>Have an account? Login here</p>
+          </LSprompt>
+          <p>Contact us: branch@gmail.com</p>
+        </Footer>
+      </Container>
+    );
+  }
 }
 
-export default Login;
+Login.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  loginUser: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(mapStateToProps,{registerUser, loginUser})(withRouter(Login))
 
 const Container = styled.div`
   height: 100vh;

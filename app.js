@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 require('./models');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Cookies for JWT
 const cookieParser = require('cookie-parser');
