@@ -15,12 +15,12 @@ function TopMenu({methods}) {
                 <input type='text'></input>
                 <MySearchIcon ></MySearchIcon>
             </SearchBar>
-            <SortTab onClick={methods.isChoosingSort}>
+            <SortTab onClick={methods.handleInputChange}>
                 <h3>Sort</h3>
                 <MySortIcon sx={{ fontSize: '30px' }} >
                 </MySortIcon>
             </SortTab>
-            <Addcard sx={{ fontSize: '60px' }} onClick={methods.isAddingCard}></Addcard>
+            <Addcard sx={{ fontSize: '60px' }} onClick={methods.handleInputChange} name="addingCard"></Addcard>
             </ToolDisplay>
             <TagList />
         </Container>

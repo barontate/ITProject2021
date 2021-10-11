@@ -1,5 +1,5 @@
-// import './App.css'
-import {React, useState} from 'react'
+import './App.css'
+import {Component, React} from 'react'
 import styled from 'styled-components'
 import PersonAddAlt1IconOutlined from '@mui/icons-material/PersonAddAlt1Outlined';
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
@@ -11,56 +11,84 @@ import {TagList} from './features/tags/TagList'
 import Contact from './features/contacts/Contact'
 import ContactArray from './features/contacts/ContactArray';
 import TopMenu from './components/TopMenu';
+import { connect } from 'react-redux';
+import { logoutUser } from './actions/authentication';
+import { withRouter } from 'react-router-dom';
 
 
-const Home = () => {
+class Home extends Component {
 
-  const [addingCard, setAddingCard] = useState(false);
-  const [choosingSort, setChoosingSort] = useState(false);
+  constructor() {
+    super();
+    this.state = {
+      addingCard: false,
+      choosingSort: false,
+      firstName: '',
+      lastName: '',
+      email: '',
+      notes: ''
+    }
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleLogout= this.handleLogout.bind(this);
+    const listOfTags = [];
+    listOfTags.push("CSS");
+    listOfTags.push("Drinking Beers");
+  }
 
-  const isAddingCard = () => setAddingCard(true);
-  const notAddingCard = () => setAddingCard(false);
-
-  const isChoosingSort = () => setChoosingSort(true);
-  const notChoosingSort = () => setChoosingSort(false);
-
-//   list to be given to us from the server
-  const listOfTags = [];
-  listOfTags.push("CSS");
-  listOfTags.push("Drinking Beers");
-//   list to be given to us by the server? may have to refresh the page to display it?
-  // var selectedTags =[];
+  handleInputChange(e) {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
+  }
   
+  handleSubmit(e) {
+    e.preventDefault();
+    const contact = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      notes: this.state.notes,
+    }
+    console.log(contact);
+  }
+
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logoutUser(this.props.history);
+  }
+
+  render() {
     return (
         <Container>
             <Header />
             <Content>
-              {!addingCard&&!choosingSort&&(
-                <TopMenu methods={{isChoosingSort, isAddingCard}} />
+              {!this.state.addingCard&&!this.state.choosingSort&&(
+                <TopMenu />
               )}
-              {!addingCard&&choosingSort&&(
+              {!this.state.addingCard&&this.state.choosingSort&&(
               <SortSelection>
-                <CloseButton sx={{ fontSize: '40px' }} onClick={notChoosingSort}></CloseButton>
+                <CloseButton sx={{ fontSize: '40px' }}  onClick={() => this.setState({choosingSort: false})}></CloseButton>
               </SortSelection>)}
-              {!addingCard&&<ContactArray />}
+              {!this.state.addingCard&&<ContactArray />}
             
-          {addingCard&&(<CardInfoInput>
-            <CloseButton sx={{ fontSize: '60px' }} onClick={notAddingCard}></CloseButton>
-            <DataIn>
+          {this.state.addingCard&&(<CardInfoInput>
+            <CloseButton sx={{ fontSize: '60px' }}  onClick={() => this.setState({addingCard: false})}></CloseButton>
+            <DataIn onSubmit={this.handleSubmit}>
               <TextFields>
                 <Name>
-                  <input type='text'></input>
-                  <input type='text'></input>
+                  <input type='text' name="firstName" onChange={this.handleInputChange}></input>
+                  <input type='text' name="lastName" onChange={this.handleInputChange}></input>
                   <input type='text'></input>
                 </Name>
                 <input type='text'></input>
                 <ContactDetails>
-                  <input type='text'></input>
+                  <input type='text' name="email" onChange={this.handleInputChange}></input>
                   <input type='text'></input>
                 </ContactDetails> 
                 <input type='text'></input>
                 <Notes>
-                  <input type='text'></input>
+                  <input type='text' name="notes" onChange={this.handleInputChange}></input>
                 </Notes>
               </TextFields>
               <LeftBar>
@@ -83,9 +111,18 @@ const Home = () => {
         </Content>
         </Container>
     )
+  }
 }
 
-export default Home;
+Home.propTypes = {
+  logoutUser: PropTypes.func.isRequired
+}
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+
+export default connect(mapStateToProps, {logoutUser})(withRouter(Home));
 
 const TextIn = styled.div`
   
@@ -281,8 +318,6 @@ const Create = styled.div`
 `
 
 const DataIn = styled.form.attrs({
-  action: "/api/add",
-  method: "post"
 })``
 
 const SearchBar = styled(TextIn)`

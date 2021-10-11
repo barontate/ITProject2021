@@ -5,6 +5,10 @@ import PersonAddAlt1IconOutlined from '@mui/icons-material/PersonAddAlt1Outlined
 import CancelOutlined from '@mui/icons-material/CancelOutlined';
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined';
 import SearchIcon from '@mui/icons-material/Search';
+import SortIcon from '@mui/icons-material/Sort';
+import Header from './components/Header';
+import ContactArray from './features/contacts/ContactArray';
+import TopMenu from './components/TopMenu';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from './actions/authentication';
@@ -17,25 +21,35 @@ class Home extends Component {
     super();
     this.state = {
       addingCard: false,
+      choosingSort: false,
+      firstName: '',
+      lastName: '',
+      email: '',
+      notes: ''
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLogout= this.handleLogout.bind(this);
+    const listOfTags = [];
+    listOfTags.push("CSS");
+    listOfTags.push("Drinking Beers");
   }
-    
+
   handleInputChange(e) {
     this.setState({
         [e.target.name]: e.target.value
     })
   }
-
+  
   handleSubmit(e) {
-      e.preventDefault();
-      const user = {
-          email: this.state.email,
-          password: this.state.password,
-      }
-      console.log(user);
+    e.preventDefault();
+    const contact = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      notes: this.state.notes,
+    }
+    console.log(contact);
   }
 
   handleLogout(e) {
@@ -43,42 +57,37 @@ class Home extends Component {
     this.props.logoutUser(this.props.history);
   }
 
-  render() { 
+  render() {
     return (
         <Container>
-          <Header>
-            <h1> LOGO </h1>
-            <Button onSubmit={this.handleLogout}>
-              <input type="submit" value="Logout"></input>
-            </ Button>
-          </Header>
-          <Content>
-            <ToolDisplay>
-              <SearchBar>
-                <input type='text'></input>
-                <MySearchIcon></MySearchIcon>
-              </SearchBar>
-              <p>[SORT---------]</p>
-              <Addcard sx={{ fontSize: '60px' }} onClick={() => this.setState({addingCard: true})}></Addcard>
-            </ToolDisplay>
-          </Content>
-          <CardInfoInput addingCard = { this.state.addingCard }>
-            <CloseButton sx={{ fontSize: '60px' }} onClick={() => this.setState({addingCard: false})}></CloseButton>
-            <DataIn onSubmit = {this.handleSubmit}>
+            <Header />
+            <Content>
+              {!this.state.addingCard&&!this.state.choosingSort&&(
+                <TopMenu methods={this.handleInputChange} addingCard={this.state.addingCard}/>
+              )}
+              {!this.state.addingCard&&this.state.choosingSort&&(
+              <SortSelection>
+                <CloseButton sx={{ fontSize: '40px' }}  onClick={() => this.setState({choosingSort: false})}></CloseButton>
+              </SortSelection>)}
+              {!this.state.addingCard&&<ContactArray />}
+            
+          {this.state.addingCard&&(<CardInfoInput>
+            <CloseButton sx={{ fontSize: '60px' }}  onClick={() => this.setState({addingCard: false})}></CloseButton>
+            <DataIn onSubmit={this.handleSubmit}>
               <TextFields>
                 <Name>
-                  <input type='text'></input>
-                  <input type='text'></input>
+                  <input type='text' name="firstName" onChange={this.handleInputChange}></input>
+                  <input type='text' name="lastName" onChange={this.handleInputChange}></input>
                   <input type='text'></input>
                 </Name>
                 <input type='text'></input>
                 <ContactDetails>
-                  <input type='text'></input>
+                  <input type='text' name="email" onChange={this.handleInputChange}></input>
                   <input type='text'></input>
                 </ContactDetails> 
                 <input type='text'></input>
                 <Notes>
-                  <input type='text'></input>
+                  <input type='text' name="notes" onChange={this.handleInputChange}></input>
                 </Notes>
               </TextFields>
               <LeftBar>
@@ -97,6 +106,8 @@ class Home extends Component {
               </ LeftBar>
             </DataIn>
           </CardInfoInput>
+          )}
+        </Content>
         </Container>
     )
   }
@@ -112,33 +123,10 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {logoutUser})(withRouter(Home));
 
-
-const Button = styled.div`
-  display: flex;
-  justify-content: center;
-  
-
-  input[type=submit] {
-    width: 60px;
-    padding: 5px;
-    border-radius: 10px;
-    background-color: rgb(150, 180, 180);
-    cursor: pointer;
-    outline: none;
-    border: none;
-    box-shadow: 2px 2px 5px grey;
-  }
-
-  input[type=submit]:hover {
-    background-color: rgb(50, 230, 230);
-    cursor: pointer;
-    box-shadow: 4px 4px 5px grey;
-  }
-`
-
 const TextIn = styled.div`
+  
   input{
-    
+    background-image: linear-gradient(to bottom, #FFFFFF, #F6F7F9);
     height: 35px;
     border-radius: 24px;
     border-style: solid;
@@ -161,20 +149,6 @@ const Container = styled.div`
   display: flex;
 `
 
-const Header = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1vh;
-  display: flex;
-  justify-content: space-between;
-
-  h1 {
-    margin: 10px;
-  }
-`
-
 const Content = styled.div`
   position: fixed;
   display: flex;
@@ -190,12 +164,11 @@ const Content = styled.div`
   border-color: #707070;
   border-radius: 32px;
   border-width: 2px;
+  overflow: hidden;
 `
 
 const ToolDisplay = styled.div`
-  position: fixed;
   display: flex;
-  top: 45px;
   height: 70px;
   align-items: center;
   justify-content: center;
@@ -213,12 +186,15 @@ const Addcard = styled(PersonAddAlt1IconOutlined)`
   color: #707070;
 `
 
-const CardInfoInput = styled(Content)`
-  display: ${props=>props.addingCard ? 'flex': 'none'};
+const CardInfoInput = styled.div`
+  display: flex;
+  background-color: white;
+  height: 80vh;
+  width: 80vw;
 `
 
 const CloseButton = styled(CancelOutlined)`
-  position: fixed;
+  position: absolute;
   right: 30px;
   top: 30px;
   cursor: pointer;
@@ -341,8 +317,6 @@ const Create = styled.div`
 `
 
 const DataIn = styled.form.attrs({
-  action: "/api/add",
-  method: "post"
 })``
 
 const SearchBar = styled(TextIn)`
@@ -363,3 +337,48 @@ const MySearchIcon = styled(SearchIcon)`
   right: 40px;
 `
 
+const SortTab = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 35px;
+  border-radius: 24px;
+  border-style: solid;
+  border-color: #707070;
+  border-width: 3px;
+  background-image: linear-gradient(to bottom, #FFFFFF, #F6F7F9);
+  cursor: pointer;
+  h3 {
+    color: #707070;
+  }
+`
+
+const MySortIcon = styled(SortIcon)`
+  margin-left: 10px;
+  color: #707070;
+`
+
+const SortSelection = styled.div`
+  display: flex;
+  position: absolute;
+  top: 65px;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 45vw;
+  background-color: white;
+  border-style: solid;
+  border-color: #707070;
+  border-radius: 32px;
+  border-width: 2px;
+  background-image: linear-gradient(to bottom, #FFFFFF, #F6F7F9);
+`
+
+// const TopMenu = styled.div`
+//   display: grid;
+//   top: 45px;
+//   position: absolute;
+//   grid-template-columns: 1;
+//   width: 45vw;
+// `
