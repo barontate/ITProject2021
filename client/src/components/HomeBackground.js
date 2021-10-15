@@ -1,8 +1,10 @@
-import React from 'react'
+import {Component, React} from 'react'
 import styled from 'styled-components'
 import Header from './Header'
 
-function HomeBackground() {
+
+class HomeBackground extends Component {
+  render(){
     return (
         <Container>
             <Header />
@@ -11,6 +13,7 @@ function HomeBackground() {
             </Content>
         </Container>
     )
+  }
 }
 
 export default HomeBackground

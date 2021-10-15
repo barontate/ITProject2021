@@ -1,0 +1,67 @@
+.splitCells {
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    right: 0;
+}
+
+.splitTextBox{
+    width:100%;
+    margin: 10px;
+}
+
+
+.textBox {
+    margin: 10px;
+}
+
+.tallTextBox {
+    margin: 10px;
+    min-height: 25vh;
+}
+
+.rightBar {
+    position: fixed;
+    display: grid;
+    grid-template-columns: 1;
+    width: 50vw;
+    top: 5vh;
+    right: 7vw;
+}
+
+.leftBar {
+    display: grid;
+    position: fixed;
+    justify-content: space-between;
+    width: 15vw;
+    left: 7vh;
+    top: 7vh;
+    bottom: 80px;
+}
+
+.picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    height: 15vw;
+    width: 15vw;
+    background-color: #707070;
+    border-radius: 140px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    }
+
+p {
+    border-style: solid;
+    height: 5vh;
+    align-items: center;
+    justify-content: center;
+    border-bottum: 1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-color: #707070;
+}
+

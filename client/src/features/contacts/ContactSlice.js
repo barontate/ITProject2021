@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = [
-  { id: '1', firstName: 'Jon', lastName: 'Doe'},
+  { id: '1', firstName: 'Jon', lastName: 'Doe', notes: "All round good bloke"},
   { id: '2', firstName: 'Jeff', lastName: 'Wiggim' },
   { id: '3', firstName: 'Jeff', lastName: 'Wiggim' },
   { id: '4', firstName: 'Nelson', lastName: 'Walker'},
@@ -9,6 +9,8 @@ const initialState = [
   { id: '6', firstName: 'Jeff', lastName: 'Wiggim' },
   { id: '7', firstName: 'Jeff', lastName: 'Wiggim' },
   { id: '8', firstName: 'Nelson', lastName: 'Walker'},
+  { id: '9', firstName: 'Jon', lastName: 'Doe'},
+  { id: '10', firstName: 'Jeff', lastName: 'Wiggim' },
 ]
 
 const contactSlice = createSlice({
@@ -21,6 +23,6 @@ const contactSlice = createSlice({
   },
 })
 
-export const { contactAdded } = contactSlice.actions
+export const { contactAdded, reverseOrder } = contactSlice.actions
 
 export default contactSlice.reducer

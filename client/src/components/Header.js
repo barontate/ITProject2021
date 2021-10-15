@@ -1,10 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import Logo from './Logo'
+import {Link} from 'react-router-dom'
 
 function Header() {
     return (
         <Container>
-                <h1> LOGO </h1>
+          <LogoSizing to={`/home`}>
+            <Logo />
+          </LogoSizing> 
                 <h1> Logout </h1>
         </Container>
     )
@@ -24,4 +28,8 @@ const Container = styled.div`
   h1 {
     margin: 10px;
   }
+`
+
+const LogoSizing = styled(Link)`
+  width: 20%;
 `
