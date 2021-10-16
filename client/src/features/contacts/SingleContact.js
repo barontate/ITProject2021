@@ -44,9 +44,7 @@ export const SingleContact = ({ match }) => {
           </div >
           <div className="leftBar">
               <LeftIn>
-              <div className='picture'>
-                  <AddPhoto sx={{ fontSize: '80px' }}></AddPhoto>
-              </div>
+                <p className='splitTextBox'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
               </LeftIn>
           </ div>
         </CardInfoInput>
@@ -124,7 +122,9 @@ const Goals = styled.div`
   margin: 10px 0px;
 `
 
-const LeftIn = styled.div``
+const LeftIn = styled.div`
+  width: 100%;
+`
 
 const Create = styled.div`
   display: flex;

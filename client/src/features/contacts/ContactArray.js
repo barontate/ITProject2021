@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { height } from '@mui/system'
 
 export const ContactArray = () => {
     
@@ -10,8 +11,11 @@ export const ContactArray = () => {
     const renderedContacts = contacts.map(contact => (
         <ContactCard className="contact-excerpt" key={contact.id}
              to={`/contact/${contact.id}`} style={{textDecoration: 'none'}}>
-            <p>{contact.firstName}</p>
-            <p>{contact.lastName}</p>
+            <Card>
+            <Name><p>{contact.firstName}</p> <p>{contact.lastName}</p></Name>
+            <Highlight> <p>{contact.highlight}</p> </Highlight>
+            </Card>
+            
         </ContactCard>
     ))
     
@@ -52,4 +56,27 @@ const ContactCard = styled(Link)`
         text-decorations-style: none;
     }
 
+`
+
+const Name = styled.h1`
+   display: flex;
+   p {
+     border: none;
+     margin: 0px 5px;
+   }
+`
+const Highlight = styled.p`
+   border: none;
+   justify-content: center;
+   display: flex;
+   p {
+    border: none;
+    margin: 0px 5px;
+  }
+`
+
+const Card = styled.div`
+   display: inline;
+   justify-content: center;
+   align-items: center;
 `

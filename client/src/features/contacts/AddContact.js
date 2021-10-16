@@ -63,23 +63,21 @@ class AddContact extends Component {
                     <DataIn onSubmit={this.handleSubmit}>
                     <TextFields>
                         <div className='splitCells'>
-                          <input className='splitTextBox' type='text' name="firstName" onChange={this.handleInputChange}></input>
-                          <input className='splitTextBox' type='text' name="lastName" onChange={this.handleInputChange}></input>
-                          <input className='splitTextBox' type='text'></input>
+                          <input className='splitTextBox' type='text' name="firstName" placeholder="First Name..." onChange={this.handleInputChange}></input>
+                          <input className='splitTextBox' type='text' name="lastName" placeholder="Middle Name..." onChange={this.handleInputChange}></input>
+                          <input className='splitTextBox' type='text' placeholder="Last Name..."></input>
                         </div>
-                        <input className='textBox' type='text'></input>
+                        <input className='textBox' type='text' placeholder="Company..."></input>
                         <div className='splitCells'>
-                          <input className='splitTextBox' type='text' name="email" onChange={this.handleInputChange}></input>
-                          <input className='splitTextBox' type='text'></input>
+                          <input className='splitTextBox' type='text' name="email" placeholder="Email..." onChange={this.handleInputChange}></input>
+                          <input className='splitTextBox' type='text' placeholder="Phone Number..." ></input>
                         </div> 
-                        <input className='textBox' type='text'></input>
-                        <input className='tallTextBox' type='text' name="notes" onChange={this.handleInputChange}></input>
+                        <input className='textBox' type='text' placeholder="Address..."></input>
+                        <textarea className='tallTextBox' type='text' name="notes" placeholder="Notes.." onChange={this.handleInputChange}></textarea>
                     </TextFields>
                     <div className='leftBar'>
                         <LeftIn>
-                          <div className='picture'>
-                              <AddPhoto sx={{ fontSize: '80px' }}></AddPhoto>
-                          </div>
+                          <input className='splitTextBox' type='text' placeholder="Highlight..."></input>
                         </LeftIn>
                         <Create>
                           <input className='textBox' type='submit' value='Create' />  
@@ -97,7 +95,7 @@ export default AddContact
 
 const TextIn = styled.div`
   
-  input{
+  input, textarea{
     background-image: linear-gradient(to bottom, #FFFFFF, #F6F7F9);
     height: 35px;
     border-radius: 24px;
@@ -105,13 +103,17 @@ const TextIn = styled.div`
     border-color: #707070;
     padding-left: 10px;
     color: #1c1c1c;
+    border-width: 2px;
   }
-  input:focus{
+  input:focus, textarea:focus{
     outline: none;
     border-radius: 24px;
     border-style: solid;
     border-color: #1c1c1c;
+    border-width: 2px;
   }
+
+
 `
 
 const CardInfoInput = styled.div`
@@ -201,7 +203,7 @@ const Goals = styled.div`
   }
 `
 
-const LeftIn = styled.div``
+const LeftIn = styled(TextIn)``
 
 const Create = styled.div`
   display: flex;

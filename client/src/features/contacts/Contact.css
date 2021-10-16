@@ -18,6 +18,7 @@
 .tallTextBox {
     margin: 10px;
     min-height: 25vh;
+    vertical-align: text-top;
 }
 
 .rightBar {
@@ -63,5 +64,10 @@ p {
     border-left: none;
     border-right: none;
     border-color: #707070;
+}
+
+input {
+    text-align: justify;
+    vertical-align: text-top;
 }
 
