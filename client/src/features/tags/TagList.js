@@ -8,7 +8,7 @@ export const TagList = () => {
 
   const renderedTags = tags.map((tag) => (
     
-    <Tag key={tag.id} name = {tag.name} selected = {tag.selected}/>
+    <Tag key={tag.id} name = {tag.name} color = {tag.color} selected = {tag.selected}/>
       // {/* <p className="post-content">{post.content.substring(0, 100)}</p> */}
     
   ))

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { tagSelected } from './tagSlice'
 
 
-function Tag({name, selected}) {
+function Tag({name, selected, color}) {
     
     // const [selected, setSelected] = useState(selectedTags.indexOf(name)>-1);
     // , selectedTags, selectEl
@@ -28,7 +28,7 @@ function Tag({name, selected}) {
     }
 
     return (
-        <Container onClick={onTagSelected} selected={selected}>
+        <Container onClick={onTagSelected} selected={selected} color={color}>
             <h3> {name} </h3>
         </Container>
     )
@@ -39,7 +39,7 @@ export default Tag
 // ${seleectedTags=>selectedTags. ? "grey" : "white"}
 
 const Container = styled.div`
-    background-color: ${props=>props.selected ? "grey" : "white"};
+    background-color: ${props=>props.selected ? props.color : "white"};
     height: 60px;
     min-width: 150px;
     margin: 10px;
