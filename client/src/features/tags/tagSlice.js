@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = [
   { id: '1', name: 'CSS', selected: false},
   { id: '2', name: 'Drinking Beers', selected: false },
+  { id: '3', name: 'React', selected: false },
+  { id: '4', name: 'Fishing', selected: false },
+  { id: '5', name: 'AFL', selected: false },
 ]
 
 const tagSlice = createSlice({

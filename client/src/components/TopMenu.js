@@ -112,6 +112,4 @@ const Container = styled.div`
   display: grid;
   top: 45px;
   position: absolute;
-  grid-template-columns: 1;
-  width: 45vw;
 `

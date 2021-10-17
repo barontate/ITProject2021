@@ -26,4 +26,5 @@ const TagChoice = styled.div`
   height: 100px;
   overflow-x: auto;
   overflow-y: hidden;
+  margin-left: -10px;
 `

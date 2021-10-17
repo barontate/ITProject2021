@@ -18,6 +18,6 @@ const Container = styled.div`
 const Picture = styled.img.attrs({
     src: '/images/logo.png'
   })`
-    width: 100%;
-    margin-right: 6px;
+    width: 90%;
+    margin: 8px;
   `

@@ -133,6 +133,8 @@ const Content = styled.div`
   border-radius: 32px;
   border-width: 2px;
   overflow: hidden;
+  margin: auto;
+  margin-top: 16px;
 `
 
 // const CardInfoInput = styled.div`

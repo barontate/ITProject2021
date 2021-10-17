@@ -9,7 +9,6 @@ function Header() {
           <LogoSizing to={`/home`}>
             <Logo />
           </LogoSizing> 
-                <h1> Logout </h1>
         </Container>
     )
 }

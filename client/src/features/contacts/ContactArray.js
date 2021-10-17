@@ -40,6 +40,9 @@ const Container = styled.div`
     height: 45vh;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding-right: 24px;
+    padding-bottom: 24px;
+    margin-top: -156px;
 `
 
 const ContactCard = styled(Link)`
