@@ -59,7 +59,7 @@ const registerUser = function (req, res) {
       const token = jwt.sign(payload, secret, {
         expiresIn: '1h'
       });
-      res.json({
+      res.cookie('token', token).json({
         success: true,
         token: `Bearer ${token}`
       });
@@ -110,8 +110,12 @@ const removeContact = async function (req, res) {
       user.save()  
     }
     let contact = await Contact.findByIdAndRemove(contactID)
-    return res.redirect('/home')
+    return res.json({
+      message: 'Contact successfully deleted!',
+      contactID: contactID
+    });
   } catch (err) {
+    console.log(err)
     return res.status(400).send(err.message)
   }
 }

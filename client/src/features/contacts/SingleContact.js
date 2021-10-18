@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import CloseButton from '../../components/CloseButton'
 import Header from '../../components/Header'
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
-import Contact from './Contact.css'
+import axios from 'axios';
 
 
 export const SingleContact = ({ match }) => {
@@ -13,6 +13,15 @@ export const SingleContact = ({ match }) => {
   const contact = useSelector(state =>
     state.contacts.contacts.find(contact => contact._id === contactId)
   )
+
+  const handleDelete = async function () {
+    const contactID = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
+    await axios.post('/api/remove', {contactID: contactID})
+      .then(res => {
+        console.log(res.data)
+        window.location.href = '/'
+      });
+  }
 
   if (!contact) {
     return (
@@ -46,6 +55,9 @@ export const SingleContact = ({ match }) => {
               <LeftIn>
                 <p className='splitTextBox'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
               </LeftIn>
+              <Create>
+                <input className='textBox' type='submit' value='Delete' onClick={handleDelete}/>  
+              </ Create>
           </ div>
         </CardInfoInput>
       </Content>
@@ -135,4 +147,21 @@ const Create = styled.div`
   left: 0px;
   right: 0px;
   height: 60px;
+
+  input[type=submit] {
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: rgb(150, 180, 180);
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 5px grey;
+  }
+  input[type=submit]:hover {
+    background-color: rgb(50, 230, 230);
+    cursor: pointer;
+    box-shadow: 4px 4px 5px grey;
+  }
 `
