@@ -99,6 +99,7 @@ const editContact = async function (req, res) {
     return res.status(400).send('Database query failed')
   }
 }
+
 const removeContact = async function (req, res) {
   try {
     const contactID = req.body.contactID;
@@ -124,7 +125,7 @@ const getContacts = async function (req, res) {
       let contact = await Contact.findById(contactIDs[i])
       contacts.push(contact)
     }
-    return res.send(contacts)
+    return res.json(contacts)
   } catch (err) {
     return res.status(400).send(err.message)
   }

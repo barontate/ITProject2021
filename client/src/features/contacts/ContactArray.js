@@ -1,30 +1,38 @@
-import React from 'react'
+import {React, useEffect} from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { height } from '@mui/system'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchContacts } from './ContactSlice'
 
 export const ContactArray = () => {
-    
-  // .sort((a,b)=>a.firstName < b.firstName);
-    const contacts = useSelector(state => state.contacts);
-    const renderedContacts = contacts.map(contact => (
-        <ContactCard className="contact-excerpt" key={contact.id}
-             to={`/contact/${contact.id}`} style={{textDecoration: 'none'}}>
-            <Card>
-            <Name><p>{contact.firstName}</p> <p>{contact.lastName}</p></Name>
-            <Highlight> <p>{contact.highlight}</p> </Highlight>
-            </Card>
-            
-        </ContactCard>
-    ))
-    
-    return (
-      <Container className="contact-list">
-        {renderedContacts}
-      </Container>
-    )
-  }
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+    }, [dispatch]
+  );
+
+  const contactObject = useSelector(state => state.contacts);
+  const renderedContacts = contactObject.contacts.map(contact => (
+    <ContactCard className="contact-excerpt" to={`/contact/${contact._id}`} style={{textDecoration: 'none'}}>
+      <Card>
+      <Name>
+        <p>{contact.firstName}</p> 
+        <p>{contact.lastName}</p>
+      </Name>
+      <Highlight> 
+        <p>{contact.highlight}</p> 
+      </Highlight>
+      </Card>
+    </ContactCard>
+  ))
+  
+  return (
+    <Container className="contact-list">
+      {renderedContacts}
+    </Container>
+  )
+}
 
 export default ContactArray
 

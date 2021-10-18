@@ -2,7 +2,6 @@ import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
-import contactAdded from '../features/contacts/ContactSlice'
 
 export const registerUser = (user, history) => dispatch => {
     axios.post('/api/signup', user)
@@ -59,8 +58,6 @@ export const addContact = (contact, history) => dispatch => {
         .then(res => {
             console.log(res.data)
             console.log(res.data.message)
-            contact.id = res.data.id
-            dispatch(contactAdded(contact))
             history.push('/home')
         })
         .catch(err => {

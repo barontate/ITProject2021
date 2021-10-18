@@ -11,7 +11,7 @@ export const SingleContact = ({ match }) => {
   const { contactId } = match.params
 
   const contact = useSelector(state =>
-    state.contacts.find(contact => contact.id === contactId)
+    state.contacts.contacts.find(contact => contact._id === contactId)
   )
 
   if (!contact) {

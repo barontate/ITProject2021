@@ -19,6 +19,8 @@ userRouter.post('/api/edit', withAuth, urlencodedParser, user.editContact)
 
 userRouter.post('/api/remove', withAuth, urlencodedParser, user.removeContact)
 
+userRouter.get('/api/contacts', withAuth, user.getContacts)
+
 // Tags
 userRouter.post('/api/add/tag', withAuth, urlencodedParser, user.addTag)
 
