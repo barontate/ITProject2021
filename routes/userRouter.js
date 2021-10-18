@@ -35,4 +35,6 @@ userRouter.get('/home', function (req, res) {
   res.redirect('/')
 })
 
+userRouter.get('/logout', withAuth, user.logout)
+
 module.exports = userRouter

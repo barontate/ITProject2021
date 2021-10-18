@@ -46,6 +46,15 @@ const login = function(req, res) {
     });
 }
 
+const logout = function (req, res) {
+  console.log('here')
+  try {
+    return res.clearCookie('token').redirect('/')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 const registerUser = function (req, res) {
   const {firstName, lastName, userName, email, password} = req.body;
   const user = new User({firstName, lastName, userName, email, password});
@@ -162,6 +171,7 @@ const addTag = async function (req, res) {
     const {name, colour, contactID} = req.body
     var tagID = req.body.tagID
     let contact = await Contact.findById(contactID)
+    let user = await User.findById({email: req.email})
     if (tagID == null) {
       const tag = new Tag({name, colour})
       tagID = tag._id
@@ -171,6 +181,10 @@ const addTag = async function (req, res) {
       contact.tags.push(tagID)
     }
     contact.save()
+    if (!user.tags.includes(tagID)) {
+      user.tags.push(tagID)
+    }
+    user.save()
     return res.redirect('/home')
   } catch (err) {
     return res.status(400).send(err.message)
@@ -195,6 +209,7 @@ const removeTag = async function (req, res) {
 
 module.exports = {
     login,
+    logout,
     registerUser,
     addContact,
     editContact,

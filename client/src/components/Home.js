@@ -64,7 +64,7 @@ class Home extends Component {
   render() {
     return (
         <Container>
-            <Header />
+            <Header logout={this.handleLogout}/>
             <Content>
               {!this.state.addingCard&&!this.state.choosingSort&&(
                 <TopMenu choosingSort={this.isChoosingSort}/> 

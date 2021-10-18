@@ -3,12 +3,13 @@ import styled from 'styled-components'
 import Logo from './Logo'
 import {Link} from 'react-router-dom'
 
-function Header() {
+function Header(props) {
     return (
         <Container>
           <LogoSizing to={`/home`}>
             <Logo />
           </LogoSizing> 
+          <h1 onClick={props.logout}>Logout</h1>
         </Container>
     )
 }

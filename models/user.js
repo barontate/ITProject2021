@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true},
     password: {type: String, required: true},
     contacts: [{type: mongoose.Schema.Types.ObjectId, ref: 'contacts'}],
+    tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'tags'}],
 })
 
 // Hash password

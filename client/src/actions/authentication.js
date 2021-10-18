@@ -50,7 +50,7 @@ export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
-    history.push('/login');
+    axios.get('/logout')
 }
 
 export const addContact = (contact, history) => dispatch => {
