@@ -1,12 +1,13 @@
-import Contact from './Contact.css'
-
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
 import Header from '../../components/Header'
 import CloseButton from '../../components/CloseButton'
-
+import {addContact} from '../../actions/authentication'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 class AddContact extends Component {
 
@@ -19,12 +20,19 @@ class AddContact extends Component {
           email: '',
           notes: ''
         }
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.isChoosingSort = this.isChoosingSort.bind(this);
         this.notChoosingSort = this.notChoosingSort.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleLogout= this.handleLogout.bind(this);
       }
     
+      handleInputChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+      }
+
       isChoosingSort(e) {
         this.setState({
             choosingSort: true,
@@ -45,7 +53,7 @@ class AddContact extends Component {
           email: this.state.email,
           notes: this.state.notes,
         }
-        console.log(contact);
+        this.props.addContact(contact, this.props.history)
       }
     
       handleLogout(e) {
@@ -63,17 +71,17 @@ class AddContact extends Component {
                     <DataIn onSubmit={this.handleSubmit}>
                     <TextFields>
                         <div className='splitCells'>
-                          <input className='splitTextBox' type='text' name="firstName" placeholder="First Name..." onChange={this.handleInputChange}></input>
-                          <input className='splitTextBox' type='text' name="lastName" placeholder="Middle Name..." onChange={this.handleInputChange}></input>
-                          <input className='splitTextBox' type='text' placeholder="Last Name..."></input>
+                          <input className='splitTextBox' type='text' name="firstName" placeholder="First Name..." onChange={this.handleInputChange} value={this.state.firstName}></input>
+                          <input className='splitTextBox' type='text'  placeholder="Middle Name..."></input>
+                          <input className='splitTextBox' type='text' name="lastName" placeholder="Last Name..." onChange={this.handleInputChange} value={this.state.lastName}></input>
                         </div>
                         <input className='textBox' type='text' placeholder="Company..."></input>
                         <div className='splitCells'>
-                          <input className='splitTextBox' type='text' name="email" placeholder="Email..." onChange={this.handleInputChange}></input>
+                          <input className='splitTextBox' type='text' name="email" placeholder="Email..." onChange={this.handleInputChange} value={this.state.email}></input>
                           <input className='splitTextBox' type='text' placeholder="Phone Number..." ></input>
                         </div> 
                         <input className='textBox' type='text' placeholder="Address..."></input>
-                        <textarea className='tallTextBox' type='text' name="notes" placeholder="Notes.." onChange={this.handleInputChange}></textarea>
+                        <textarea className='tallTextBox' type='text' name="notes" placeholder="Notes.." onChange={this.handleInputChange} value={this.state.notes}></textarea>
                     </TextFields>
                     <div className='leftBar'>
                         <LeftIn>
@@ -91,7 +99,11 @@ class AddContact extends Component {
     }
 }
 
-export default AddContact
+AddContact.propTypes = { 
+  addContact: PropTypes.func.isRequired
+}
+
+export default connect(null, {addContact})(withRouter(AddContact))
 
 const TextIn = styled.div`
   

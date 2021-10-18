@@ -36,7 +36,7 @@ const login = function(req, res) {
             const token = jwt.sign(payload, secret, {
               expiresIn: '1h'
             });
-            res.json({
+            res.cookie('token', token).json({
               success: true,
               token: `Bearer ${token}`
             });
@@ -66,7 +66,7 @@ const registerUser = function (req, res) {
     }
   });
 }
-
+ 
 // Contacts
 const addContact = async function (req, res) {
   try {
@@ -78,9 +78,13 @@ const addContact = async function (req, res) {
     }
     contact.save()
     user.save()
-    return res.redirect('/home')
+    return res.json({
+      message: 'Contact successfully added!',
+      contactID: contact._id
+    });
   } catch (err) {
-    return res.stauts(400).send('Database query failed')
+    console.log(err)
+    return res.status(400).send('Database query failed')
   }
 }
 
@@ -92,7 +96,7 @@ const editContact = async function (req, res) {
     contact.save()
     return res.redirect('/home')
   } catch (err) {
-    return res.stauts(400).send('Database query failed')
+    return res.status(400).send('Database query failed')
   }
 }
 const removeContact = async function (req, res) {
