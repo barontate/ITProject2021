@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const colours = ['red', 'green', 'blue', 'yellow', 'purple', 'orange', 'brown']
 
 const tagSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    name: {type: String, required: true, unique: true},
     colour: {type: String, enum: colours},
 })
 

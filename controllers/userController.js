@@ -129,6 +129,27 @@ const getContacts = async function (req, res) {
       let contact = await Contact.findById(contactIDs[i])
       contacts.push(contact)
     }
+    contacts.sort(function (a, b) {
+      var first = a.firstName.toLowerCase()
+      var second = b.firstName.toLowerCase()
+      if (first > second) {
+        return 1
+      }
+      else if (first < second) {
+        return -1
+      }
+      else if (first === second) {
+
+        if (firstLast > secondLast) {
+          console.log(firstLast, secondLast)
+          return 1
+        }
+        else if (firstLast < secondLast) {
+          return -1
+        }
+        return 0
+      }
+    })
     return res.json(contacts)
   } catch (err) {
     return res.status(400).send(err.message)
