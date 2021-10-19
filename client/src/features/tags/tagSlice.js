@@ -6,6 +6,7 @@ const initialState = [
   { id: '3', name: 'React', selected: false, color: '#956868' },
   { id: '4', name: 'Fishing', selected: false, color: '#7EBFE6' },
   { id: '5', name: 'AFL', selected: false, color: '#AC7EE6' },
+  { id: '6', name: 'Unimelb', selected: false, color: '#AC7EE6' },
 ]
 
 const tagSlice = createSlice({

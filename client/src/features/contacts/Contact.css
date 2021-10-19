@@ -40,6 +40,7 @@
     bottom: 80px;
 }
 
+/* TODO: can we delete this? */
 .picture {
     display: flex;
     justify-content: center;
@@ -59,7 +60,7 @@ p {
     height: 5vh;
     align-items: center;
     justify-content: center;
-    border-bottum: 1px;
+    border-bottom: 1px;
     border-top: none;
     border-left: none;
     border-right: none;
