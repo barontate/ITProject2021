@@ -39,8 +39,8 @@ export const SingleContact = ({ match }) => {
           <CloseButton />
           <div className='rightBar'>
               <div className='splitCells'>
-                <p className='splitTextBox'>{contact.firstName? contact.firstName : "FirstName: Unknown"}</p>
-                <p className='splitTextBox'>{contact.middleName ? contact.middleName : "MiddleName: Unknown"}</p>
+                <p className='splitTextBox'>{contact.firstName? contact.firstName : "First name: Unknown"}</p>
+                <p className='splitTextBox'>{contact.middleName ? contact.middleName : "Middle name: Unknown"}</p>
                 <p className='splitTextBox'>{contact.lastName}</p>
               </div>
               <p className='textBox'>{contact.company ? contact.company : "Company: Unknown"}</p>

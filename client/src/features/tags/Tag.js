@@ -5,8 +5,21 @@ import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { tagSelected } from './tagSlice'
 
+// from stackoverflow: https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
+var generateColor = function(str) {
+  var hash = 0;
+  for (var i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  var colour = '#';
+  for (i = 0; i < 3; i++) {
+    var value = (hash >> (i * 8)) & 0xFF;
+    colour += ('00' + value.toString(16)).substr(-2);
+  }
+  return colour;
+}
 
-function Tag({name, selected, color}) {
+function Tag({name, selected}) {
     
     // const [selected, setSelected] = useState(selectedTags.indexOf(name)>-1);
     // , selectedTags, selectEl
@@ -27,8 +40,9 @@ function Tag({name, selected, color}) {
     
     }
 
+
     return (
-        <Container onClick={onTagSelected} selected={selected} color={color}>
+        <Container onClick={onTagSelected} selected={selected} color={generateColor(name)}>
             <h3> {name} </h3>
         </Container>
     )
