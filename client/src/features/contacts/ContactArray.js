@@ -17,8 +17,7 @@ export const ContactArray = () => {
     <ContactCard className="contact-excerpt" to={`/contact/${contact._id}`} style={{textDecoration: 'none'}}>
       <Card>
       <Name>
-        <p>{contact.firstName}</p> 
-        <p>{contact.lastName}</p>
+        <p>{contact.firstName+" "+contact.lastName}</p> 
       </Name>
       <Highlight> 
         <p>{contact.highlight}</p> 
@@ -50,7 +49,6 @@ const Container = styled.div`
     overflow-x: hidden;
     padding-right: 24px;
     padding-bottom: 24px;
-    margin-top: -156px;
 `
 
 const ContactCard = styled(Link)`
@@ -63,17 +61,20 @@ const ContactCard = styled(Link)`
     border-color: #707070;
     border-radius: 2vw;
     p{
-        color: #707070;
-        text-decorations-style: none;
+      color: #707070;
+      text-decorations-style: none;
     }
 
 `
 
 const Name = styled.h1`
    display: flex;
+   text-align: center;
    p {
-     border: none;
-     margin: 0px 5px;
+    padding: 8px;
+    font-size: 24px;
+    border: none;
+    margin: 0px 5px;
    }
 `
 const Highlight = styled.p`

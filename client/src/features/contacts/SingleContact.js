@@ -38,25 +38,28 @@ export const SingleContact = ({ match }) => {
       <Content>
         <CardInfoInput>
           <CloseButton />
-          <div className='rightBar'>
+          <TextFields>
               <div className='splitCells'>
-                <p className='splitTextBox'>{contact.firstName? contact.firstName : "First name: Unknown"}</p>
-                <p className='splitTextBox'>{contact.middleName ? contact.middleName : "Middle name: Unknown"}</p>
-                <p className='splitTextBox'>{contact.lastName}</p>
+                <p className='splitTextBox textDisplay'>{contact.firstName? contact.firstName : "First name: Unknown"}</p>
+                <p className='splitTextBox textDisplay'>{contact.middleName ? contact.middleName : "Middle name: Unknown"}</p>
+                <p className='splitTextBox textDisplay'>{contact.lastName}</p>
               </div>
-              <p className='textBox'>{contact.company ? contact.company : "Company: Unknown"}</p>
+              <p className='textBox textDisplay'>{contact.company ? contact.company : "Company: Unknown"}</p>
               <div className='splitCells'>
-                <p className='splitTextBox'>{contact.phoneNumber ? contact.phoneNumber : "Phone Number: Unknown"}</p>
-                <p className='splitTextBox'>{contact.email ? contact.email : "Email: Unknown"}</p>
+              {contact.phoneNumber ? <p className='splitTextBox textDisplay'>{contact.phoneNumber} </ p> : <GreyText className='splitTextBox textDisplay'> Phone Number </GreyText>}
+                <p className='splitTextBox  textDisplay'>{contact.email ? contact.email : "Email: Unknown"}</p>
               </div> 
-              <p className='textBox'>{contact.address ? contact.address : "Address: Unknown"}</p>
-              <p className='tallTextBox'>{contact.notes ? contact.notes : "No Notes"}</p>
-          </div >
+              {contact.address ? <p className='textBox  textDisplay'> {contact.address} </p> : <GreyText className='textBox  textDisplay'> Address </ GreyText>}
+              <p className='tallTextBox  textDisplay'>{contact.notes ? contact.notes : "No Notes"}</p>
+          </TextFields >
           <div className="leftBar">
               <LeftIn>
-                <p className='splitTextBox'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
+                <p className='splitTextBox textDisplay'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
               </LeftIn>
           </ div>
+          <Delete>
+           <input className='textBox' type='submit' value='Delete' />  
+          </ Delete>
         </CardInfoInput>
       </Content>
     </Container>
@@ -124,19 +127,15 @@ const LeftBar = styled.div`
   bottom: 80px;
 `
 
-const Goals = styled.div`
-  display: flex;
-  position: relative;
-  left: 0;
-  right: 0;
-  margin: 10px 0px;
-`
-
 const LeftIn = styled.div`
   width: 100%;
 `
 
-const Create = styled.div`
+const GreyText = styled.p`
+  color: #707070;
+`
+
+const Delete = styled.div`
   display: flex;
   position: absolute;
   justify-content: center;
@@ -147,6 +146,7 @@ const Create = styled.div`
   height: 60px;
 
   input[type=submit] {
+    text-align: center;
     width: 100px;
     height: 40px;
     padding: 5px;
@@ -162,4 +162,15 @@ const Create = styled.div`
     cursor: pointer;
     box-shadow: 4px 4px 5px grey;
   }
+  
+  
+`
+
+const TextFields = styled.div`
+  position: fixed;
+  display: grid;
+  grid-template-columns: 1;
+  width: 50vw;
+  top: 5vh;
+  right: 7vw;
 `

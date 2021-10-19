@@ -17,17 +17,10 @@
 
 .tallTextBox {
     margin: 10px;
-    min-height: 25vh;
+    min-height: 22vh;
     vertical-align: text-top;
-}
-
-.rightBar {
-    position: fixed;
-    display: grid;
-    grid-template-columns: 1;
-    width: 50vw;
-    top: 5vh;
-    right: 7vw;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 .leftBar {
@@ -41,16 +34,15 @@
 }
 
 
-p {
-    border-style: solid;
+.textDisplay {
     height: 5vh;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px;
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    border-radius: 24px;
+    border-style: solid;
     border-color: #707070;
+    padding-left: 10px;
+    padding-top: 10px;
+    color: #1c1c1c;
+    border-width: 2px;
 }
 
 input {

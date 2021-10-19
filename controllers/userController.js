@@ -158,6 +158,7 @@ const getContacts = async function (req, res) {
 // Tags
 const addTag = async function (req, res) {
   try {
+    console.log(req.body)
     const {name, colour, contactID} = req.body
     var tagID = req.body.tagID
     let contact = await Contact.findById(contactID)
@@ -203,7 +204,7 @@ const getTags = async function (req, res) {
     let tagIDs = user.tags
     var tags = []
     for (var i = 0; i < tagIDs.length; i++) {
-      let tag = await tag.findById(tagIDs[i])
+      let tag = await Tag.findById(tagIDs[i])
       tags.push(tag)
     }
     tags.sort(function (a, b) {
@@ -232,5 +233,6 @@ module.exports = {
     removeContact,
     getContacts,
     addTag,
-    removeTag
+    removeTag,
+    getTags
 }

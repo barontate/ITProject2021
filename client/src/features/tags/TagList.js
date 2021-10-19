@@ -2,7 +2,7 @@ import { React, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Tag from './Tag'
 import styled from 'styled-components'
-import fetchTags from './tagSlice'
+import { fetchTags } from './tagSlice'
 
 export const TagList = () => {
   const dispatch = useDispatch();
@@ -34,4 +34,5 @@ const TagChoice = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   margin-left: -10px;
+  margin-top: -12px;
 `

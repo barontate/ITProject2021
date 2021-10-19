@@ -87,10 +87,10 @@ class AddContact extends Component {
                         <LeftIn>
                           <input className='splitTextBox' type='text' placeholder="Highlight..."></input>
                         </LeftIn>
-                        <Create>
-                          <input className='textBox' type='submit' value='Create' />  
-                        </ Create>
                     </ div>
+                    <Create>
+                          <input className='textBox' type='submit' value='Create' />  
+                    </ Create>
                     </DataIn>
                 </CardInfoInput>
               </Content>
@@ -109,7 +109,7 @@ const TextIn = styled.div`
   
   input, textarea{
     background-image: linear-gradient(to bottom, #FFFFFF, #F6F7F9);
-    height: 35px;
+    height: 5vh;
     border-radius: 24px;
     border-style: solid;
     border-color: #707070;
@@ -228,6 +228,7 @@ const Create = styled.div`
   height: 60px;
 
   input[type=submit] {
+    text-align: center;
     width: 100px;
     height: 40px;
     padding: 5px;

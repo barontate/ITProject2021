@@ -26,7 +26,7 @@ userRouter.post('/api/add/tag', withAuth, urlencodedParser, user.addTag)
 
 userRouter.post('/api/remove/tag', withAuth, urlencodedParser, user.removeTag)
 
-userRouter.get('/api/tags', withAuth, user.getTags)
+userRouter.get('/api/tags', withAuth, urlencodedParser, user.getTags)
 
 // Misc
 userRouter.get('/verify', withAuth, function (req, res) {

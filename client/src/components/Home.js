@@ -11,7 +11,7 @@ import { connect, useDispatch } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import reverseOrder from '../features/contacts/ContactSlice';
-import SortTab from './SortTab';
+import AddTag from './AddTag';
 
 
 
@@ -71,10 +71,10 @@ class Home extends Component {
               )}
               {!this.state.addingCard&&this.state.choosingSort&&(
               <SortSelection>
-                <SortTab />
+                <AddTag />
                 <CloseButton sx={{ fontSize: '40px' }}  onClick={this.notChoosingSort}></CloseButton>
               </SortSelection>)}
-              {!this.state.addingCard&&<ContactArray />}
+              <ContactArray />
         </Content>
         </Container>
     )

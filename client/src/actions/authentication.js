@@ -64,3 +64,15 @@ export const addContact = (contact, history) => dispatch => {
             console.log(err)
         })
 }
+
+export const addTag = (tag, history) => dispatch => {
+    axios.post('/api/add/tag', tag)
+        .then(res => {
+            console.log(res.data)
+            console.log(res.data.message)
+            history.push('/home')
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
