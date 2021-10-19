@@ -5,6 +5,7 @@ import CloseButton from '../../components/CloseButton'
 import Header from '../../components/Header'
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
 import axios from 'axios';
+import Contact from './Contact.css'
 
 
 export const SingleContact = ({ match }) => {
@@ -55,9 +56,6 @@ export const SingleContact = ({ match }) => {
               <LeftIn>
                 <p className='splitTextBox'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
               </LeftIn>
-              <Create>
-                <input className='textBox' type='submit' value='Delete' onClick={handleDelete}/>  
-              </ Create>
           </ div>
         </CardInfoInput>
       </Content>

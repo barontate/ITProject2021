@@ -40,20 +40,6 @@
     bottom: 80px;
 }
 
-/* TODO: can we delete this? */
-.picture {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    height: 15vw;
-    width: 15vw;
-    background-color: #707070;
-    border-radius: 140px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    }
 
 p {
     border-style: solid;

@@ -147,17 +147,7 @@ const getContacts = async function (req, res) {
       else if (first < second) {
         return -1
       }
-      else if (first === second) {
-
-        if (firstLast > secondLast) {
-          console.log(firstLast, secondLast)
-          return 1
-        }
-        else if (firstLast < secondLast) {
-          return -1
-        }
-        return 0
-      }
+      return 0
     })
     return res.json(contacts)
   } catch (err) {
@@ -202,6 +192,32 @@ const removeTag = async function (req, res) {
     }
     let tag = await Tag.findByIdAndRemove(tagID)
     return res.redirect('/home')
+  } catch (err) {
+    return res.status(400).send(err.message)
+  }
+}
+
+const getTags = async function (req, res) {
+  try {
+    let user = await User.findOne({email: req.email})
+    let tagIDs = user.tags
+    var tags = []
+    for (var i = 0; i < tagIDs.length; i++) {
+      let tag = await tag.findById(tagIDs[i])
+      tags.push(tag)
+    }
+    tags.sort(function (a, b) {
+      var first = a.name.toLowerCase()
+      var second = b.name.toLowerCase()
+      if (first > second) {
+        return 1
+      }
+      else if (first < second) {
+        return -1
+      }
+      return 0
+    })
+    return res.json(tags)
   } catch (err) {
     return res.status(400).send(err.message)
   }
