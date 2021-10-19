@@ -47,7 +47,6 @@ const login = function(req, res) {
 }
 
 const logout = function (req, res) {
-  console.log('here')
   try {
     return res.clearCookie('token').redirect('/')
   } catch (err) {
@@ -151,6 +150,7 @@ const getContacts = async function (req, res) {
     })
     return res.json(contacts)
   } catch (err) {
+    console.log(err)
     return res.status(400).send(err.message)
   }
 }
@@ -158,25 +158,19 @@ const getContacts = async function (req, res) {
 // Tags
 const addTag = async function (req, res) {
   try {
-    console.log(req.body)
-    const {name, colour, contactID} = req.body
-    var tagID = req.body.tagID
-    let contact = await Contact.findById(contactID)
-    let user = await User.findById({email: req.email})
-    if (tagID == null) {
-      const tag = new Tag({name, colour})
-      tagID = tag._id
-      tag.save()
-    }
-    if (!contact.tags.includes(tagID)) {
-      contact.tags.push(tagID)
-    }
-    contact.save()
+    const { name } = req.body
+    let user = await User.findOne({email: req.email})
+    const tag = new Tag({name})
+    tagID = tag._id
+    tag.save()
     if (!user.tags.includes(tagID)) {
       user.tags.push(tagID)
     }
     user.save()
-    return res.redirect('/home')
+    return res.json({
+      message: 'Tag successfully added!',
+      tagID: tagID
+    });
   } catch (err) {
     return res.status(400).send(err.message)
   }
@@ -186,13 +180,22 @@ const removeTag = async function (req, res) {
   try {
     const {contactID, tagID} = req.body
     let contact = await Contact.findById(contactID)
-    if (contact.tags.includes(tagID)) {
-      const index = contact.tags.indexOf(tagID)
-      contact.tags.splice(index, 1)
-      contact.save()
+    let user = await User.findOne({email: req.email})
+    // if (contact.tags.includes(tagID)) {
+    //   const index = contact.tags.indexOf(tagID)
+    //   contact.tags.splice(index, 1)
+    //   contact.save()
+    // }
+    if (user.tags.includes(tagID)) {
+      const index = user.tags.indexOf(tagID)
+      user.tags.splice(index, 1)
+      user.save()
     }
     let tag = await Tag.findByIdAndRemove(tagID)
-    return res.redirect('/home')
+    return res.json({
+      message: 'Tag successfully deleted!',
+      tagID: tagID
+    });
   } catch (err) {
     return res.status(400).send(err.message)
   }
@@ -220,6 +223,7 @@ const getTags = async function (req, res) {
     })
     return res.json(tags)
   } catch (err) {
+    console.log(err)
     return res.status(400).send(err.message)
   }
 }

@@ -19,7 +19,6 @@ export const SingleContact = ({ match }) => {
     const contactID = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
     await axios.post('/api/remove', {contactID: contactID})
       .then(res => {
-        console.log(res.data)
         window.location.href = '/'
       });
   }
@@ -58,7 +57,7 @@ export const SingleContact = ({ match }) => {
               </LeftIn>
           </ div>
           <Delete>
-           <input className='textBox' type='submit' value='Delete' />  
+           <input className='textBox' type='submit' value='Delete' onClick={handleDelete}/>  
           </ Delete>
         </CardInfoInput>
       </Content>

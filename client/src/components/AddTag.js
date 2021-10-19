@@ -40,7 +40,7 @@ class AddTag extends Component {
     render(){
         return (
             <TagForm onSubmit={this.handleSubmit}>
-            <input type="text" name="name" placeholder="Tag Name"/>
+            <input type="text" name="name" placeholder="Tag Name" onChange={this.handleInputChange}/>
             <input type="submit" value="Add Tag"/>
             </TagForm>
         )

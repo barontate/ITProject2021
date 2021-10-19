@@ -236,9 +236,10 @@ const SignUpForm = styled.form.attrs({
 const Button = styled.div`
   display: flex;
   justify-content: center;
-  
+  margin: 8px;
 
   input[type=submit] {
+    text-align: center;
     width: 60px;
     padding: 5px;
     border-radius: 10px;

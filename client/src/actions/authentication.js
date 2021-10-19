@@ -56,8 +56,6 @@ export const logoutUser = (history) => dispatch => {
 export const addContact = (contact, history) => dispatch => {
     axios.post('/api/add', contact)
         .then(res => {
-            console.log(res.data)
-            console.log(res.data.message)
             history.push('/home')
         })
         .catch(err => {
@@ -68,9 +66,7 @@ export const addContact = (contact, history) => dispatch => {
 export const addTag = (tag, history) => dispatch => {
     axios.post('/api/add/tag', tag)
         .then(res => {
-            console.log(res.data)
-            console.log(res.data.message)
-            history.push('/home')
+            history.push('/')
         })
         .catch(err => {
             console.log(err)
