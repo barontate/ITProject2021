@@ -5,7 +5,20 @@ export const fetchContacts = () => async dispatch => {
   dispatch(contactsLoading());
   await axios.get('/api/contacts')
     .then(res => {
-      console.log(res.data)
+      dispatch(contactsReceived(res.data));
+    })
+    .catch(err => {
+      console.log(err)
+    })
+}
+
+export const fetchContactsByTag = (tagIDs) => async dispatch => {
+  dispatch(contactsLoading());
+  const data = {
+    tagIDs: tagIDs
+  }
+  await axios.post('/api/contacts/tag', data)
+    .then(res => {
       dispatch(contactsReceived(res.data));
     })
     .catch(err => {

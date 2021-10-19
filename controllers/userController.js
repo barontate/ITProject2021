@@ -155,6 +155,35 @@ const getContacts = async function (req, res) {
   }
 }
 
+const getContactsByTag = async function (req, res) {
+  try {
+    const { tagIDs } = req.body
+    let user = await User.findOne({email: req.email})
+    let contactIDs = user.contacts
+    var contacts = []
+    for (var i = 0; i < contactIDs.length; i++) {
+      let contact = await Contact.findById(contactIDs[i])
+      if (contact.tags.includes(tagIDs)) {
+        contacts.push(contact)
+      }
+    }
+    contacts.sort(function (a, b) {
+      var first = a.firstName.toLowerCase()
+      var second = b.firstName.toLowerCase()
+      if (first > second) {
+        return 1
+      }
+      else if (first < second) {
+        return -1
+      }
+      return 0
+    })
+    return res.json(contacts)
+  } catch (err) {
+    console.log(err)
+    return res.status(400).send(err.message)
+  }
+}
 // Tags
 const addTag = async function (req, res) {
   try {
@@ -236,6 +265,7 @@ module.exports = {
     editContact,
     removeContact,
     getContacts,
+    getContactsByTag,
     addTag,
     removeTag,
     getTags

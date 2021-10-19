@@ -1,9 +1,8 @@
 import {React, useState} from 'react'
-import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import { tagSelected } from './tagSlice'
+import { fetchContactsByTag, fetchContacts } from '../contacts/ContactSlice'
 
 // from stackoverflow: https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 var generateColor = function(str) {
@@ -19,7 +18,7 @@ var generateColor = function(str) {
   return colour;
 }
 
-function Tag({name, selected}) {
+function Tag({name, selected, tagID}) {
     
     // const [selected, setSelected] = useState(selectedTags.indexOf(name)>-1);
     // , selectedTags, selectEl
@@ -33,11 +32,15 @@ function Tag({name, selected}) {
     const dispatch = useDispatch();
 
     const onTagSelected = () => {
-        
         dispatch(
             tagSelected(name)
         )
-    
+        if (selected) {
+            dispatch(fetchContacts())
+        }
+        else {
+            dispatch(fetchContactsByTag(tagID))
+        }
     }
 
 
