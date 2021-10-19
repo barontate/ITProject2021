@@ -35,4 +35,5 @@ const TagChoice = styled.div`
   overflow-y: hidden;
   margin-left: -10px;
   margin-top: -12px;
+  max-width: 65vw;
 `

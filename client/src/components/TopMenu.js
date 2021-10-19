@@ -15,9 +15,7 @@ function TopMenu({choosingSort}) {
                 <MySearchIcon ></MySearchIcon>
             </SearchBar>
             <SortTab onClick={choosingSort}>
-                <h3>Sort</h3>
-                <MySortIcon sx={{ fontSize: '30px' }} >
-                </MySortIcon>
+                <h3>Add Tag</h3>
             </SortTab>
             <Link to={'/addingCard'}>
               <Addcard sx={{ fontSize: '60px' }}></Addcard>

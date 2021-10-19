@@ -6,6 +6,7 @@ import Header from '../../components/Header'
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
 import axios from 'axios';
 import Contact from './Contact.css'
+import { TagDisplayer } from '../tags/TagDisplayer'
 
 
 export const SingleContact = ({ match }) => {
@@ -39,22 +40,23 @@ export const SingleContact = ({ match }) => {
           <CloseButton />
           <TextFields>
               <div className='splitCells'>
-                <p className='splitTextBox textDisplay'>{contact.firstName? contact.firstName : "First name: Unknown"}</p>
-                <p className='splitTextBox textDisplay'>{contact.middleName ? contact.middleName : "Middle name: Unknown"}</p>
-                <p className='splitTextBox textDisplay'>{contact.lastName}</p>
+              {contact.firstName ?  <p className='splitTextBox textDisplay'>{contact.firstName} </p>: <GreyText className='splitTextBox textDisplay'>First Name </GreyText>}
+              {contact.middleName ? <p className='splitTextBox textDisplay'> {contact.middleName} </p> : <GreyText className='splitTextBox textDisplay'>Middle Name</GreyText>}
+              {contact.lastName ? <p className='splitTextBox textDisplay'> {contact.lastName} </p> : <GreyText className='splitTextBox textDisplay'>Last Name</GreyText>}
               </div>
-              <p className='textBox textDisplay'>{contact.company ? contact.company : "Company: Unknown"}</p>
+              {contact.company ? <p className='textBox textDisplay'> {contact.company} </p> : <GreyText className='textBox textDisplay'>Company</GreyText>}
               <div className='splitCells'>
               {contact.phoneNumber ? <p className='splitTextBox textDisplay'>{contact.phoneNumber} </ p> : <GreyText className='splitTextBox textDisplay'> Phone Number </GreyText>}
-                <p className='splitTextBox  textDisplay'>{contact.email ? contact.email : "Email: Unknown"}</p>
+              {contact.email ? <p className='splitTextBox  textDisplay'>{contact.email}</p> : <GreyText className='splitTextBox textDisplay'>Email</GreyText>}
               </div> 
-              {contact.address ? <p className='textBox  textDisplay'> {contact.address} </p> : <GreyText className='textBox  textDisplay'> Address </ GreyText>}
-              <p className='tallTextBox  textDisplay'>{contact.notes ? contact.notes : "No Notes"}</p>
+              {contact.address ? <p className='textBox  textDisplay'> {contact.address} </p> : <GreyText className='textBox textDisplay'> Address </ GreyText>}
+              {contact.notes ? <p className='tallTextBox  textDisplay'> {contact.notes} </p> : <GreyText className='tallTextBox textDisplay'>No Notes</GreyText>}
           </TextFields >
           <div className="leftBar">
               <LeftIn>
-                <p className='splitTextBox textDisplay'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
+              {contact.highlight ? <p className='splitTextBox textDisplay'> {contact.highlight} </p>: <GreyText className='splitTextBox textDisplay'>Highlight</ GreyText>}
               </LeftIn>
+              <TagDisplayer />
           </ div>
           <Delete>
            <input className='textBox' type='submit' value='Delete' onClick={handleDelete}/>  
