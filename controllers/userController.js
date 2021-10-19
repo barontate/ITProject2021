@@ -78,8 +78,8 @@ const registerUser = function (req, res) {
 // Contacts
 const addContact = async function (req, res) {
   try {
-    const {firstName, lastName, email, notes} = req.body
-    const contact = new Contact({firstName, lastName, email, notes})
+    const {firstName, lastName, email, notes, highlight} = req.body
+    const contact = new Contact({firstName, lastName, email, notes, highlight})
     let user =  await User.findOne({email: req.email})
     if (!user.contacts.includes(contact._id)) {
       user.contacts.push(contact._id)

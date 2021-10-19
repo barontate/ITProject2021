@@ -5,6 +5,7 @@ const contactSchema = new mongoose.Schema({
     lastName: {type: String},
     email: { type: String},
     notes: {type: String},
+    highlight: {type: String},
     tags: [{type: mongoose.Schema.Types.ObjectId, ref: 'tags'}],
 })
 

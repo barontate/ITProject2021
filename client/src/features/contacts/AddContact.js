@@ -19,7 +19,8 @@ class AddContact extends Component {
           firstName: '',
           lastName: '',
           email: '',
-          notes: ''
+          notes: '',
+          highlight: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.isChoosingSort = this.isChoosingSort.bind(this);
@@ -53,6 +54,7 @@ class AddContact extends Component {
           lastName: this.state.lastName,
           email: this.state.email,
           notes: this.state.notes,
+          highlight: this.state.highlight,
         }
         this.props.addContact(contact, this.props.history)
       }
@@ -86,7 +88,7 @@ class AddContact extends Component {
                     </TextFields>
                     <div className='leftBar'>
                         <LeftIn>
-                          <input className='splitTextBox' type='text' placeholder="Highlight..."></input>
+                          <input className='splitTextBox' type='text' name='highlight' placeholder="Highlight..." onChange={this.handleInputChange} value={this.state.highlight}></input>
                         </LeftIn>
                         <TagSelector />
                     </ div>
