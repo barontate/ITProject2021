@@ -6,7 +6,7 @@ import Header from '../../components/Header'
 import AddAPhotoOutlinedIcon from '@mui/icons-material/AddAPhotoOutlined'
 import axios from 'axios';
 import Contact from './Contact.css'
-
+import { TagDisplayer } from '../tags/TagSelector'
 
 export const SingleContact = ({ match }) => {
   const { contactId } = match.params
@@ -56,6 +56,7 @@ export const SingleContact = ({ match }) => {
               <LeftIn>
                 <p className='splitTextBox textDisplay'>{contact.highlight ? contact.highlight : "highlight: Unknown"}</p>
               </LeftIn>
+              <TagDisplayer />
           </ div>
           <Delete>
            <input className='textBox' type='submit' value='Delete' />  

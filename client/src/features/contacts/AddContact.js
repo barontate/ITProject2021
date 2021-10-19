@@ -8,6 +8,7 @@ import {addContact} from '../../actions/authentication'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import TagSelector from '../tags/TagSelector'
 
 class AddContact extends Component {
 
@@ -86,6 +87,7 @@ class AddContact extends Component {
                     <div className='leftBar'>
                         <LeftIn>
                           <input className='splitTextBox' type='text' placeholder="Highlight..."></input>
+                          <TagSelector />
                         </LeftIn>
                     </ div>
                     <Create>
