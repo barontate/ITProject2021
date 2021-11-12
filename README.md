@@ -1,3 +1,11 @@
-# IT Project 2021 :)
+# Installation Instructions
 
-## email walkernj@student.unimelb.edu.au to contact
+Extract zip and navigate to root directory then execute the following commands:
+
+npm install
+cd client
+npm install
+npm run build
+
+To run the app, navigate to the root directory, and run
+npm start
